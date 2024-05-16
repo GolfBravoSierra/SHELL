@@ -1,0 +1,3 @@
+#!/bin/bash
+gcc -g -o shell shell.c  -L/user/local/lib  -lreadline
+./shell
