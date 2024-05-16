@@ -6,7 +6,7 @@
 #include <sys/wait.h>
 #include <readline/readline.h>
 #include <readline/history.h>
-#include <linux/limits.h>
+#include <dirent.h> 
 
 // Definindo constantes =====================================
 #define palavra_tamanho 30
@@ -68,6 +68,56 @@ int main(){
         {
             printf("ola de comando");
         }
+        else if (strcmp(path[0], "ls") == 0)
+        {
+            // Crinado processo para funcão ls ==============
+            pid_t pid = fork();
+            // ==============================================
+
+            // Verificando se o processo foi criado =========
+            if (pid == 0)
+            {
+                // Chamando a função ls =====================
+                execl("./ls", "ls", NULL);
+                _exit(0);
+                // ==========================================
+            }
+            else
+            {
+                int status;
+                waitpid(pid, &status, 0);
+            }
+            // ==============================================
+
+        }
+        else if (strcmp(path[0], "exit") == 0)
+        {
+            return 0;
+        }
+        else 
+        {
+            printf("ola vc esta no exeção");
+            // Crinado processo =============================
+            pid_t pid = fork();
+            // ==============================================
+
+            // Verificando se o processo foi criado =========
+            if (pid == 0)
+            {
+                // Chamando a função ls =====================
+                printf("ola vc esta no exeção fork");
+                char *caminho = strcat("/bin/", path[0]);
+                execl(caminho, path[0], NULL);
+                _exit(0);
+                // ==========================================
+            }
+            else
+            {
+                int status2;
+                waitpid(pid, &status2, 0);
+            }
+            // ==============================================
+        }
         // ==================================================
     }   
     // ======================================================
@@ -94,18 +144,14 @@ int main(){
 // Função CD ================================================
 char* cdfunction(char **path){
 
-    //printf("ola vc esta np cd ps tirar isso depois"); // TIRE ANTES DE ENTREGAR
+    // Declarando variaveis =================================
     chdir(path[1]);    
-
-    for (int i = 0; path[i] != NULL; i++) { // TIRE ANTES DE ENTREGAR
-        printf("Palavra %d: %s\n", i, path[i]);
-    }
+    // ======================================================
 
     // Declarando variaveis =================================
     char *path2;
     path2 = (char*)malloc(30*sizeof(char));
     // ======================================================
-
 
 return path[1];
 }
@@ -113,7 +159,8 @@ return path[1];
 
 
 // Função PATH ==============================================
-char* pathfunction(char *path){
+char* pathfunction(char *path)
+{
 
     printf("ola vc esta np path");    
 
