@@ -104,11 +104,29 @@ int main(){
             // Verificando se o processo foi criado =========
             if (pid == 0)
             {
-                // Chamando a função ls =====================
+                // Procurando o arquivo no PATH ==============
                 printf("ola vc esta no exeção fork");
-                char *caminho = strcat("/bin/", path[0]);
-                execl(caminho, path[0], NULL);
-                _exit(0);
+                char *path_env = getenv("PATH");
+                if (path_env == NULL) 
+                {
+                    perror("getenv");
+                    _exit(1);
+                }
+
+                char *path_copy = strdup(path_env);
+                char *dir = strtok(path_copy, ":");
+                while (dir != NULL) 
+                {
+                    char caminho[256];
+                    snprintf(caminho, sizeof(caminho), "%s/%s", dir, path[0]);
+                    execl(caminho, path[0], NULL);
+                    dir = strtok(NULL, ":");
+                }
+                free(path_copy);
+
+                // Se chegamos a este ponto, então a execução falhou
+                perror("execl");
+                _exit(1);
                 // ==========================================
             }
             else
