@@ -51,9 +51,9 @@ int main(){
 
         // Separando input ==================================
         path = split_input(input);
-        for (int i = 0; path[i] != NULL; i++) { // TIRE ANTES DE ENTREGAR
-            printf("Palavra %d: %s\n", i, path[i]);
-        }
+        ///for (int i = 0; path[i] != NULL; i++) { // TIRE ANTES DE ENTREGAR
+        ///    printf("Palavra %d: %s\n", i, path[i]);
+        ///}
         // ==================================================
 
 
@@ -92,7 +92,7 @@ int main(){
         }
         else if (strcmp(path[0], "exit") == 0)
         {
-            return 0;
+            break;
         }
         else 
         {
@@ -179,11 +179,28 @@ return path[1];
 // Função PATH ==============================================
 char* pathfunction(char *path)
 {
+    // Alocando memória para a nova variável PATH
+    char *newPath = (char*)malloc((strlen(getenv("PATH")) + strlen(path) + 2) * sizeof(char));
 
-    printf("ola vc esta np path");    
+    // Copiando o PATH atual para a nova variável
+    strcpy(newPath, getenv("PATH"));
 
+    // Adicionando o separador
+    strcat(newPath, ":");
 
-return path;
+    // Adicionando o novo diretório
+    strcat(newPath, path);
+
+    // Configurando a nova variável PATH
+    setenv("PATH", newPath, 1);
+
+    // Liberando a memória alocada
+    free(newPath);
+
+    printf("O caminho %s foi adicionado ao PATH\n", path);
+    
+
+    return path;
 }
 // ==========================================================
 
