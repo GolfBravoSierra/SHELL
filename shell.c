@@ -64,6 +64,8 @@ int main(){
         else if (strcmp(input, "path") == 0)
         {
             printf("ola de comando");
+
+            pathfunction(path[1]);
         }
         else if (strcmp(path[0], "ls") == 0)
         {
@@ -181,10 +183,12 @@ return path[1];
 char* pathfunction(char *path)
 {
     // Alocando memória para a nova variável PATH
-    char *newPath = (char*)malloc((strlen(getenv("PATH")) + strlen(path) + 2) * sizeof(char));
+    // char *newPath = (char*)malloc((strlen(getenv("PATH")) + strlen(path) + 2) * sizeof(char));
+
+    char *newPath[150]
 
     // Copiando o PATH atual para a nova variável
-    strcpy(newPath, getenv("PATH"));
+    strcpy(getenv("PATH"), newPath);
 
     // Adicionando o separador
     strcat(newPath, ":");
@@ -194,6 +198,8 @@ char* pathfunction(char *path)
 
     // Configurando a nova variável PATH
     setenv("PATH", newPath, 1);
+
+    printf("%s\n", newPath);
 
     // Liberando a memória alocada
     free(newPath);
