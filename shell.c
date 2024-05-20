@@ -28,14 +28,15 @@ int main(){
     char **path = NULL;
     // ======================================================
 
+    // Obtendo o diretório de trabalho atual ============
+    char cwd[1024];
+    if (getcwd(cwd, sizeof(cwd)) != NULL)
+    // ==================================================
+
 
     // Laço infinito ========================================
     while(strcmp(input, "exit") != 0)
     {
-        
-        // Limpando o Terminal ==============================
-        //system("clear"); // DESCOMENTAR ANTES DE ENTREGAR
-        // ==================================================
 
         // Recebendo input do usuario =======================
         if (getcwd(s, 600) == NULL) 
@@ -51,11 +52,7 @@ int main(){
 
         // Separando input ==================================
         path = split_input(input);
-        ///for (int i = 0; path[i] != NULL; i++) { // TIRE ANTES DE ENTREGAR
-        ///    printf("Palavra %d: %s\n", i, path[i]);
-        ///}
         // ==================================================
-
 
         // Tratamento de entrada ============================
         if (strcmp(path[0], "cd") == 0)
@@ -77,8 +74,10 @@ int main(){
             // Verificando se o processo foi criado =========
             if (pid == 0)
             {
+                // Concatenando o caminho do executável======
+                strcat(cwd, "/ls");
                 // Chamando a função ls =====================
-                execl("./ls", "ls", NULL);
+                execl(cwd, "ls", NULL);
                 _exit(0);
                 // ==========================================
             }
@@ -96,7 +95,6 @@ int main(){
         }
         else 
         {
-            printf("ola vc esta no exeção");
             // Crinado processo =============================
             pid_t pid = fork();
             // ==============================================
@@ -153,7 +151,7 @@ int main(){
     // ======================================================
 
     // Finalizando o programa ===============================
-    printf("obrigado volte sempre \n");
+    printf("obrigado por usar nosso shell volte sempre \n");
     // ======================================================
 
     return 0;
@@ -163,7 +161,10 @@ int main(){
 char* cdfunction(char **path){
 
     // Declarando variaveis =================================
-    chdir(path[1]);    
+    if (chdir(path[1]) != 0) {
+        printf("Erro ao mudar de diretório\n");
+        return NULL;
+    }
     // ======================================================
 
     // Declarando variaveis =================================
@@ -234,125 +235,3 @@ char** split_input(char *input) {
     return path;
 }
 // ==========================================================
-
-
-// partes do codigo que foram comentadas para serem implementadas depois
-// ou que deram errado mesmo
-/*
-    // Crinado processo para funcão CD ==============
-    pid_t pid = fork();
-    // ==============================================
-
-    // Verificando se o processo foi criado =========
-    if (pid < 0)
-    {
-        perror("fork");
-        return NULL;
-    }
-    // ==============================================
-
-    // Processo filho executa cd ====================
-    if (pid == 0)
-    {
-        printf("ola vc esta np cd");
-        exit(0);
-    }
-    else
-    {
-        wait(NULL);
-    }
-    // ============================================== 
-
-    // Verificando se o diretório existe ====================
-    while(flag == 1)
-    {
-        if(chdir(path) != 0) 
-        {
-            perror("chdir");
-            flag = 1;
-            printf("Diretório não encontrado, tente novamente:\n>");
-            scanf("%s", path);
-        }
-    }
-    // ======================================================
-    printf("Agora você está no diretório %s\n", path);
-
-    // Recebendo o caminho do diretório e tratando entrada ==
-    while (flag == 0)
-    {
-        printf("\n cd>");
-        scanf("%s", path);
-
-        // Verificando se o diretório existe ================
-        if (chdir(path) == 0)
-        {
-            flag = 1;
-        }
-        else
-        {
-            printf("\n diretorio nao encontrado \n");
-        }
-        // ==================================================
-    }
-    // ======================================================
-
-
-
-
-        // Crinado processo para funcão CD ======================
-    pid_t pid = fork();
-    // ======================================================
-
-    // Verificando se o processo foi criado =================
-    if (pid < 0)
-    {
-        perror("fork");
-        return path2;
-    }
-    // ======================================================  
-
-    // Processo filho executa cd ============================
-    if (pid == 0)
-    {
-        printf("ola vc esta np cd");
-        // procurando o diretório ===========================
-        if(chdir(path) != 0) 
-        {
-            perror("chdir");
-            return path;
-        }
-        //printf("Agora você está no diretório %s\n", path);
-        return path;
-        // ==================================================
-    }
-    else
-    {
-        wait(NULL);
-    }
-
-    // ======================================================
-
-
-    // Função Separando entrada =================================
-    void split_input(char *input, char *instruction, char *path) {
-
-    // Declarando variaveis =================================
-    char *token = strtok(input, " "); //a função strtok é usada para dividir a string em tokens
-    // ======================================================
-
-    // Separando a entrada ==================================
-    if (token != NULL) //verifica se a primeira palavra esta vazia
-    {
-        strcpy(instruction, token);// copiando a primeira palavra para a variavel instruction
-        token = strtok(NULL, " ");// chamando a função strtok novamente para pegar a segunda palavra
-    }
-
-    if (token != NULL)  // segundo if para ver se o resto da string esta vazia
-    {
-        strcpy(path, token); // copiando a segunda palavra para a variavel path (resto da frase)
-    }
-    // ======================================================
-}
-// ==========================================================
-
-*/
