@@ -35,7 +35,7 @@ int main(){
 
     // Obtendo o diretório de trabalho atual ============
     char cwd[1024];
-    //if (getcwd(cwd, sizeof(cwd)) != NULL)
+    if (getcwd(cwd, sizeof(cwd)) != NULL){}
     char Pathbackup[1524];
     strcpy(Pathbackup, getenv("PATH"));
     // ==================================================
