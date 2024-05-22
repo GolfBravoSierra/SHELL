@@ -11,7 +11,7 @@
 // Definindo constantes =====================================
 #define palavra_tamanho 30
 #define MAX_path 100
-char oldPath[1524];
+char newPath[1524];
 // ==========================================================
 
 // Declaração de Funcções ===================================
@@ -28,13 +28,14 @@ int main(){
     char s[600];
     char **comando = NULL;
     // ======================================================
-    
 
+    // Pedindo Path para o usuario ==========================
+    //printf("De o primeiro comando path para setar o diretorio para shell procurar executaveis;\n");
+    // ======================================================
 
     // Obtendo o diretório de trabalho atual ============
     char cwd[1024];
-    if (getcwd(cwd, sizeof(cwd)) != NULL)
-    strcpy(oldPath, getenv("PATH"));
+    //if (getcwd(cwd, sizeof(cwd)) != NULL)
     char Pathbackup[1524];
     strcpy(Pathbackup, getenv("PATH"));
     // ==================================================
@@ -109,8 +110,7 @@ int main(){
             if (pid == 0)
             {
                 // Procurando o arquivo no PATH ==============
-                printf("ola vc esta no exeção fork");
-                char *path_env = oldPath;
+                char *path_env = newPath;
                 if (path_env == NULL) 
                 {
                     perror("getenv");
@@ -188,34 +188,32 @@ return comando[1];
 // Função PATH ==============================================
 char* pathfunction(char *comando)
 {
-
-
-    char newPath[650];
-
-    // Adicionando o separador
-    strcat(newPath, ":");
+    // Verificando se o comando é nulo
+    if (comando == NULL) {
+        printf("Erro: comando inválido\n");
+        return NULL;
+    }
+    
+    // Verificando se o comando está vazio
+    if (strlen(comando) == 0) {
+        printf("Erro: comando vazio\n");
+        return NULL;
+    }
     
     // Adicionando o novo diretório
     strcat(newPath, comando);
 
-    // Adicionando o novo diretório
-    strcat(oldPath, newPath);
+    // Adicionando o separador
+    strcat(newPath, ":");
 
     // Configurando a nova variável PATH
     setenv("PATH", newPath, 1);
 
-    // Imprimindo o PATH antigo
-    printf("%s\n", oldPath);
-    
-    // Imprimindo o novo PATH
-    // printf("%s\n", newPath);
-
-
     printf("O caminho %s foi adicionado ao PATH\n", comando);
-    
 
-    return oldPath;
+    return newPath;
 }
+
 // ==========================================================
 
 
