@@ -11,11 +11,12 @@
 // Definindo constantes =====================================
 #define palavra_tamanho 30
 #define MAX_path 100
+char oldPath[1524];
 // ==========================================================
 
 // Declaração de Funcções ===================================
 char* cdfunction();
-char* pathfunction(char *path);
+char* pathfunction(char *comando);
 int somafunction(int numero1, int numero2);
 char** split_input(char *input);
 // ==========================================================
@@ -25,12 +26,17 @@ int main(){
     // Declarando variaveis =================================
     char input[100] = ""; 
     char s[600];
-    char **path = NULL;
+    char **comando = NULL;
     // ======================================================
+    
+
 
     // Obtendo o diretório de trabalho atual ============
     char cwd[1024];
     if (getcwd(cwd, sizeof(cwd)) != NULL)
+    strcpy(oldPath, getenv("PATH"));
+    char Pathbackup[1524];
+    strcpy(Pathbackup, getenv("PATH"));
     // ==================================================
 
 
@@ -51,23 +57,21 @@ int main(){
         // ==================================================
 
         // Separando input ==================================
-        path = split_input(input);
+        comando = split_input(input);
         // ==================================================
 
         // Tratamento de entrada ============================
-        if (strcmp(path[0], "cd") == 0)
+        if (strcmp(comando[0], "cd") == 0)
         {   
             // Chamando a função CD ==========================
-            cdfunction(path);
+            cdfunction(comando);
             // ===============================================
         }
         else if (strcmp(input, "path") == 0)
         {
-            printf("ola de comando");
-
-            pathfunction(path[1]);
+            pathfunction(comando[1]);
         }
-        else if (strcmp(path[0], "ls") == 0)
+        else if (strcmp(comando[0], "ls") == 0)
         {
             // Crinado processo para funcão ls ==============
             pid_t pid = fork();
@@ -91,7 +95,7 @@ int main(){
             // ==============================================
 
         }
-        else if (strcmp(path[0], "exit") == 0)
+        else if (strcmp(comando[0], "exit") == 0)
         {
             break;
         }
@@ -106,7 +110,7 @@ int main(){
             {
                 // Procurando o arquivo no PATH ==============
                 printf("ola vc esta no exeção fork");
-                char *path_env = getenv("PATH");
+                char *path_env = oldPath;
                 if (path_env == NULL) 
                 {
                     perror("getenv");
@@ -118,8 +122,8 @@ int main(){
                 while (dir != NULL) 
                 {
                     char caminho[256];
-                    snprintf(caminho, sizeof(caminho), "%s/%s", dir, path[0]);
-                    execl(caminho, path[0], NULL);
+                    snprintf(caminho, sizeof(caminho), "%s/%s", dir, comando[0]);
+                    execl(caminho, comando[0], NULL);
                     dir = strtok(NULL, ":");
                 }
                 free(path_copy);
@@ -141,14 +145,16 @@ int main(){
     // ======================================================
 
     // liberando a memoria alocada ==========================
-    for (int i = 0; path[i] != NULL; i++) 
+    for (int i = 0; comando[i] != NULL; i++) 
     {
-        free(path[i]);
+        free(comando[i]);
     }       
-    free(path);
+    free(comando);
     // ======================================================
 
     // Limpando o Terminal ==================================
+    // Configurando a nova variável PATH
+    setenv("PATH", Pathbackup, 1);
     system("clear");
     // ======================================================
 
@@ -160,10 +166,10 @@ int main(){
 }
 
 // Função CD ================================================
-char* cdfunction(char **path){
+char* cdfunction(char **comando){
 
     // Declarando variaveis =================================
-    if (chdir(path[1]) != 0) {
+    if (chdir(comando[1]) != 0) {
         printf("Erro ao mudar de diretório\n");
         return NULL;
     }
@@ -174,40 +180,41 @@ char* cdfunction(char **path){
     path2 = (char*)malloc(30*sizeof(char));
     // ======================================================
 
-return path[1];
+return comando[1];
 }
 // ==========================================================
 
 
 // Função PATH ==============================================
-char* pathfunction(char *path)
+char* pathfunction(char *comando)
 {
-    // Alocando memória para a nova variável PATH
-    // char *newPath = (char*)malloc((strlen(getenv("PATH")) + strlen(path) + 2) * sizeof(char));
 
-    char *newPath[150]
 
-    // Copiando o PATH atual para a nova variável
-    strcpy(getenv("PATH"), newPath);
+    char newPath[650];
 
     // Adicionando o separador
     strcat(newPath, ":");
+    
+    // Adicionando o novo diretório
+    strcat(newPath, comando);
 
     // Adicionando o novo diretório
-    strcat(newPath, path);
+    strcat(oldPath, newPath);
 
     // Configurando a nova variável PATH
     setenv("PATH", newPath, 1);
 
-    printf("%s\n", newPath);
+    // Imprimindo o PATH antigo
+    printf("%s\n", oldPath);
+    
+    // Imprimindo o novo PATH
+    // printf("%s\n", newPath);
 
-    // Liberando a memória alocada
-    free(newPath);
 
-    printf("O caminho %s foi adicionado ao PATH\n", path);
+    printf("O caminho %s foi adicionado ao PATH\n", comando);
     
 
-    return path;
+    return oldPath;
 }
 // ==========================================================
 
