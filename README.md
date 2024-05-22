@@ -60,5 +60,5 @@ path /home/user/Documentos
 
 ## Autores
 
-| [<img src="https://avatars.githubusercontent.com/u/67844545?v=4" width=115><br><sub>Eduardo Silva</sub>](https://github.com/EduardoSilvaS) |  [<img src="https://avatars.githubusercontent.com/u/106974254?v=4" width=115><br><sub>GolfBravoSierra</sub>](https://github.com/GolfBravoSierra) |  [<img src="https://avatars.githubusercontent.com/u/111363981?v=4" width=115><br><sub>VRoston</sub>](https://github.com/VRoston) | [<img src="https://avatars.githubusercontent.com/u/111525582?v=4" width=115><br><sub>Luccavco</sub>](https://github.com/Luccavco) | 
+| [<img src="https://avatars.githubusercontent.com/u/67844545?v=4" width=115><br><sub>Eduardo Silva</sub>](https://github.com/EduardoSilvaS) |  [<img src="https://avatars.githubusercontent.com/u/106974254?v=4" width=115><br><sub>Giovani BS</sub>](https://github.com/GolfBravoSierra) |  [<img src="https://avatars.githubusercontent.com/u/111363981?v=4" width=115><br><sub>VRoston</sub>](https://github.com/VRoston) | [<img src="https://avatars.githubusercontent.com/u/111525582?v=4" width=115><br><sub>Luccavco</sub>](https://github.com/Luccavco) | 
 | :---: | :---: | :---: |:---: |
