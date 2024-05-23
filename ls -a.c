@@ -23,8 +23,7 @@ int main() {
     // para readdir()
     while ((de = readdir(dr)) != NULL)
     {
-        if (de->d_name[0] != '.')
-            printf("%s\n", de->d_name);
+        printf("%s\n", de->d_name);
     }
     closedir(dr);    
 
