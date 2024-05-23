@@ -27,6 +27,7 @@ Primeiro certifique se de ter a biblioteca ReadLine instalada no seu computador,
 ```sh
 sudo apt-get install libreadline-dev
 ```
+Em seguida execute os progrmas ls, ls -l e ls -a, para gerar uma pasta output e os exec deles.
 
 Para compilar nosso programa use os comandos:
 
