@@ -85,7 +85,7 @@ int main(){
             {
 
                 // Concatenando o caminho do executável======
-                strcat(cwd, "/output/ls");
+                strcat(cwd, "/ls");
                 // Chamando a função ls =====================
                 execl(cwd, "ls", NULL);
                 _exit(0);
@@ -109,7 +109,7 @@ int main(){
             {
 
                 // Concatenando o caminho do executável======
-                strcat(cwd, "/output/ls -l");
+                strcat(cwd, "/ls -l");
                 // Chamando a função ls =====================
                 execl(cwd, "ls", "-l", NULL);
                 _exit(0);
@@ -133,7 +133,7 @@ int main(){
             {
 
                 // Concatenando o caminho do executável======
-                strcat(cwd, "/output/ls -a");
+                strcat(cwd, "/ls -a");
                 // Chamando a função ls =====================
                 execl(cwd, "ls", "-a", NULL);
                 _exit(0);
