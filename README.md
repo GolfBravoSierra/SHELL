@@ -4,19 +4,24 @@
 
 Esse é um programa em C que foi desenvolvido como projeto final  da matéria, Projetos de Sistemas Operacionais, ele tem como objetivo simular as funcionalidade de um terminal Shell de sistemas com base em Linux.
 
-Objetivo:
+## Funcionalidades
+CD -> implementada
 
-Desenvolver uma aplicação Shell – interpretador de comandos
+EXIT -> implementada
 
-Conceitos envolvidos:
+LS -> implementada
 
-Programação em C
+LS -L -> implementada
 
-Chamadas de sistema
+LS -A -> implementada
 
-Criação e gerenciamento de processos
+PATH -> implementada
 
-Gerenciamento de arquivos
+CAT -> NÃO implementada
+
+REDIRECIONAMENTO DE SAIDA -> NÃO implementada
+
+COMANDOS EM PARALELO -> NÃO implementado
 
 ### Passo a Passo de como executar nosso Shell
 
