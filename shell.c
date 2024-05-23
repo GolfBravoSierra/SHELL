@@ -170,7 +170,7 @@ char* cdfunction(char **comando){
 
     // Declarando variaveis =================================
     if (chdir(comando[1]) != 0) {
-        printf("Erro ao mudar de diretório\n");
+        printf("Erro ao mudar de diretório, diretório inexistente ou sem permissão\n");
         return NULL;
     }
     // ======================================================
