@@ -73,7 +73,7 @@ int main(){
         {
             pathfunction(comando[1]);
         }
-        else if (strcmp(comando[0], "ls") == 0 && comando[1] == NULL)
+        else if (strcmp(comando[0], "ls") == 0)
         {
 
             
@@ -85,9 +85,9 @@ int main(){
             {
 
                 // Concatenando o caminho do executável======
-                strcat(cwd, "/ls");
+                strcat(cwd, "/output/ls");
                 // Chamando a função ls =====================
-                execl(cwd, "ls", NULL);
+                execl(cwd, comando[0] , comando[1], NULL);
                 _exit(0);
             }
             else
@@ -98,54 +98,6 @@ int main(){
             // ==============================================
             
 
-        }
-        else if (strcmp(comando[0], "ls") == 0 && comando[1]!= NULL && strcmp(comando[1], "-l") == 0)
-        {
-            // Crinado processo para funcão ls ==============
-            pid_t pid = fork();
-            // ==============================================
-            // Verificando se o processo foi criado =========
-            if (pid == 0)
-            {
-
-                // Concatenando o caminho do executável======
-                strcat(cwd, "/ls -l");
-                // Chamando a função ls =====================
-                execl(cwd, "ls", "-l", NULL);
-                _exit(0);
-                break;
-
-            }
-            else
-            {
-                int status;
-                waitpid(pid, &status, 0);
-            }
-            // ==============================================
-        }
-        else if (strcmp(comando[0], "ls") == 0 && comando[1]!= NULL && strcmp(comando[1], "-a") == 0)
-        {
-            // Crinado processo para funcão ls ==============
-            pid_t pid = fork();
-            // ==============================================
-            // Verificando se o processo foi criado =========
-            if (pid == 0)
-            {
-
-                // Concatenando o caminho do executável======
-                strcat(cwd, "/ls -a");
-                // Chamando a função ls =====================
-                execl(cwd, "ls", "-a", NULL);
-                _exit(0);
-                break;
-
-            }
-            else
-            {
-                int status;
-                waitpid(pid, &status, 0);
-            }
-            // ==============================================
         }
         else if (strcmp(comando[0], "exit") == 0)
         {
