@@ -87,7 +87,7 @@ int main(){
                 // Concatenando o caminho do executável======
                 strcat(cwd, "/output/ls");
                 // Chamando a função ls =====================
-                execl(cwd, comando[0] , comando[1], NULL);
+                execl(cwd, comando[0] , comando[1], comando[2], NULL);
                 _exit(0);
             }
             else
