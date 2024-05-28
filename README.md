@@ -17,7 +17,7 @@ LS -A -> implementada
 
 PATH -> implementada
 
-CAT -> NÃO implementada
+CLONE DO CAT -> NÃO implementada
 
 REDIRECIONAMENTO DE SAIDA -> NÃO implementada
 
