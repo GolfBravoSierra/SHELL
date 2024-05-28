@@ -17,15 +17,15 @@ LS -A -> implementada
 
 PATH -> implementada
 
-CAT -> NÃO implementada
+CLONE DO CAT -> NÃO implementada
 
 REDIRECIONAMENTO DE SAIDA -> NÃO implementada
 
 COMANDOS EM PARALELO -> NÃO implementado
 
-### Passo a Passo de como executar nosso Shell
+## Passo a Passo de como executar nosso Shell
 
-clone o nosso repositório
+### clone o nosso repositório ou baixe nossa release
 
 Primeiro certifique se de ter a biblioteca ReadLine instalada no seu computador, para faser isso rode o comando:
 
