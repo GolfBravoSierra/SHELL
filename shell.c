@@ -62,6 +62,13 @@ int main(){
         comando = split_input(input);
         // ==================================================
 
+        // Verificando NULL =================================
+        if (comando[0] == NULL)
+        {
+            continue;
+        }
+        // ==================================================
+        
         // Tratamento de entrada ============================
         if (strcmp(comando[0], "cd") == 0)
         {   
@@ -126,7 +133,7 @@ int main(){
                 {
                     char caminho[256];
                     snprintf(caminho, sizeof(caminho), "%s/%s", dir, comando[0]);
-                    execl(caminho, comando[0], NULL);
+                    execl(caminho, comando[0], comando[1], comando[2], NULL);
                     dir = strtok(NULL, ":");
                 }
                 free(path_copy);
